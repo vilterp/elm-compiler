@@ -97,8 +97,9 @@ compile context source interfaces =
 
           let interface = Module.toInterface packageName modul
           let javascript = JS.generate modul
+          let json = Json.toJSON modul
 
-          return (Result docs interface javascript)
+          return (Result docs interface javascript json)
   in
     ( Result.oneToValue dummyLocalizer Localizer oneLocalizer
     , Bag.toList Warning warnings
@@ -117,6 +118,7 @@ data Result = Result
     { _docs :: Maybe Docs.Documentation
     , _interface :: PublicModule.Interface
     , _js :: LazyText.Text
+    , _jsonAst :: Json.Value
     }
 
 

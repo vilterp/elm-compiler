@@ -16,6 +16,8 @@ module AST.Module
     where
 
 import Data.Binary
+import Data.Aeson as Json
+import Data.Text as Text
 import qualified Data.Map as Map
 
 import qualified AST.Declaration as Decl
@@ -111,6 +113,9 @@ type Canonical =
 type Optimized =
   Module (Info [Optimized.Def])
 
+
+instance Json.ToJSON (Module a) where
+  toJSON modul = Json.String (Text.pack "sup")
 
 
 -- IMPORTS
