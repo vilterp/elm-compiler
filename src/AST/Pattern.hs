@@ -1,5 +1,8 @@
 {-# OPTIONS_GHC -Wall #-}
+{-# LANGUAGE TemplateHaskell #-}
 module AST.Pattern where
+
+import qualified Data.Aeson.TH as JsonTH
 
 import qualified Data.Set as Set
 
@@ -32,6 +35,9 @@ type Raw' =
 
 type Canonical =
     Pattern R.Region Var.Canonical
+
+
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Pattern')
 
 
 isVar :: String -> Pattern ann var -> Bool

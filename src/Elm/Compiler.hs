@@ -92,12 +92,12 @@ compile context source interfaces =
       context
 
     (Result.Result oneLocalizer warnings answer) =
-      do  modul <- Compile.compile packageName dependencies interfaces source
+      do  (modul, canModul) <- Compile.compile packageName dependencies interfaces source
           docs <- Result.format Error.Docs (docsGen isExposed modul)
 
           let interface = Module.toInterface packageName modul
           let javascript = JS.generate modul
-          let json = Json.toJSON modul
+          let json = Json.toJSON canModul
 
           return (Result docs interface javascript json)
   in

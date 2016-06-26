@@ -1,8 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
 module Reporting.Region where
 
-import Data.Aeson ((.=))
-import qualified Data.Aeson as Json
+import qualified Data.Aeson.TH as JsonTH
 import qualified Text.Parsec.Pos as Parsec
 
 
@@ -48,17 +48,21 @@ toString (Region start end) =
 
 -- JSON
 
-instance Json.ToJSON Region where
-  toJSON (Region start end) =
-      Json.object
-        [ "start" .= start
-        , "end" .= end
-        ]
+--instance Json.ToJSON Region where
+--  toJSON (Region start end) =
+--      Json.object
+--        [ "start" .= start
+--        , "end" .= end
+--        ]
+--
+--
+--instance Json.ToJSON Position where
+--  toJSON (Position line column) =
+--      Json.object
+--        [ "line" .= line
+--        , "column" .= column
+--        ]
 
 
-instance Json.ToJSON Position where
-  toJSON (Position line column) =
-      Json.object
-        [ "line" .= line
-        , "column" .= column
-        ]
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Region)
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Position)

@@ -1,4 +1,7 @@
+{-# LANGUAGE TemplateHaskell #-}
 module AST.Variable where
+
+import qualified Data.Aeson.TH as JsonTH
 
 import Data.Binary
 import qualified Data.Maybe as Maybe
@@ -43,6 +46,13 @@ data Canonical = Canonical
     , name :: !String
     }
     deriving (Eq, Ord)
+
+
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Canonical)
+
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Home)
+
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''TopLevel)
 
 
 local :: String -> Canonical

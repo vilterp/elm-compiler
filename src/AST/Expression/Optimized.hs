@@ -5,7 +5,6 @@ module AST.Expression.Optimized
     , Decider(..), Choice(..)
     ) where
 
-import qualified Data.Aeson as Json
 import qualified Data.Text as Text
 
 import qualified AST.Expression.General as Expr
@@ -62,10 +61,6 @@ data Expr
     | Program (Expr.Main Type.Canonical) Expr
     | GLShader String String Literal.GLShaderTipe
     | Crash ModuleName.Canonical R.Region (Maybe Expr)
-
-
-instance Json.ToJSON Expr where
-    toJSON expr = Json.String (Text.pack "sup")
 
 
 data Decider a

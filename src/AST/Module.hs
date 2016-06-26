@@ -1,3 +1,5 @@
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE OverloadedStrings #-}
 module AST.Module
     ( Header(..), Module(..)
 
@@ -18,6 +20,7 @@ module AST.Module
 import Data.Binary
 import Data.Aeson as Json
 import Data.Text as Text
+import Data.Vector as Vector
 import qualified Data.Map as Map
 
 import qualified AST.Declaration as Decl
@@ -114,8 +117,12 @@ type Optimized =
   Module (Info [Optimized.Def])
 
 
-instance Json.ToJSON (Module a) where
-  toJSON modul = Json.String (Text.pack "sup")
+instance Json.ToJSON (Module (Info [Canonical.Def])) where
+  toJSON modul =
+    Json.object $
+      [ "name" .= ("moduleName" :: String)
+      , "defs" .= (program (info modul))
+      ]
 
 
 -- IMPORTS

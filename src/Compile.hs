@@ -31,7 +31,7 @@ compile
     -> [ModuleName.Canonical]
     -> Module.Interfaces
     -> String
-    -> Result Module.Optimized
+    -> Result (Module.Optimized, Module.Module (Module.Info [Can.Def]))
 compile packageName canonicalImports interfaces source =
   do
       -- Parse the source code
@@ -66,10 +66,16 @@ compile packageName canonicalImports interfaces source =
       let info =
             (Module.info canonicalModule)
               { Module.types = types
+              , Module.program = canonicalDefs
+              }
+
+      let optInfo =
+            (Module.info canonicalModule)
+              { Module.types = types
               , Module.program = optimisedDefs
               }
 
-      return $ canonicalModule { Module.info = info }
+      return $ (canonicalModule { Module.info = optInfo }, canonicalModule { Module.info = info })
 
 
 getOpTable :: Module.Interfaces -> Parse.OpTable

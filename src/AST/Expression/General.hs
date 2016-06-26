@@ -1,4 +1,5 @@
 {-# OPTIONS_GHC -Wall #-}
+{-# LANGUAGE TemplateHaskell #-}
 
 {-| The Abstract Syntax Tree (AST) for expressions comes in a couple formats.
 The first is the fully general version and is labeled with a prime (Expr').
@@ -7,6 +8,8 @@ of the compilation process. I expect there to be more phases as we begin to
 enrich the AST with more information.
 -}
 module AST.Expression.General where
+
+import qualified Data.Aeson.TH as JsonTH
 
 import qualified AST.Effects as Effects
 import qualified AST.Literal as Literal
@@ -69,6 +72,10 @@ data Main typ
   | NoFlags
   | Flags typ
 
+
+
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Main)
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Expr')
 
 
 ---- UTILITIES ----

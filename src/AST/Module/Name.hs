@@ -1,4 +1,7 @@
+{-# LANGUAGE TemplateHaskell #-}
 module AST.Module.Name where
+
+import qualified Data.Aeson.TH as JsonTH
 
 import Data.Binary
 import qualified Data.List as List
@@ -14,6 +17,9 @@ data Canonical = Canonical
     , _module :: Raw
     }
     deriving (Eq, Ord, Show)
+
+
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Canonical)
 
 
 inCore :: Raw -> Canonical

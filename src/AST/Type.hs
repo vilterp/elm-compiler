@@ -1,3 +1,4 @@
+{-# LANGUAGE TemplateHaskell #-}
 module AST.Type
     ( Raw, Raw'(..)
     , Canonical(..), Aliased(..)
@@ -6,6 +7,8 @@ module AST.Type
     , tuple, cmd, sub
     )
     where
+
+import qualified Data.Aeson.TH as JsonTH
 
 import Control.Arrow (second)
 import Data.Binary
@@ -48,6 +51,10 @@ data Aliased t
     | Filled t
     deriving (Eq, Ord)
 
+
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Aliased)
+
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Canonical)
 
 
 -- CONSTRUCT USEFUL TYPES

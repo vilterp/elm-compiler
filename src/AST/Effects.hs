@@ -1,4 +1,7 @@
+{-# LANGUAGE TemplateHaskell #-}
 module AST.Effects where
+
+import qualified Data.Aeson.TH as JsonTH
 
 import qualified AST.Type as Type
 import qualified Elm.Package as Pkg
@@ -66,3 +69,10 @@ data PortCanonical =
 data Kind
   = Outgoing Type.Canonical
   | Incoming Type.Canonical
+
+
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Effects)
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Info)
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''PortCanonical)
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Kind)
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''ManagerType)

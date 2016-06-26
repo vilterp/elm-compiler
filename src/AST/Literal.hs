@@ -1,5 +1,8 @@
 {-# OPTIONS_GHC -Wall #-}
+{-# LANGUAGE TemplateHaskell #-}
 module AST.Literal where
+
+import qualified Data.Aeson.TH as JsonTH
 
 import qualified Data.Map as Map
 
@@ -11,6 +14,9 @@ data Literal
     | Str String
     | Boolean Bool
     deriving (Eq, Ord)
+
+
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Literal)
 
 
 toString :: Literal -> String
@@ -52,3 +58,7 @@ data GLShaderTipe = GLShaderTipe
     , varying :: Map.Map String GLTipe
     }
     deriving (Eq)
+
+
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''GLShaderTipe)
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''GLTipe)
