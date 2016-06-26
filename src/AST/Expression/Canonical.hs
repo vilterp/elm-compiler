@@ -45,7 +45,8 @@ $(JsonTH.deriveJSON JsonTH.defaultOptions ''Def)
 
 dummyFacts :: Facts
 dummyFacts =
-  Facts (error "This should be set by Canonicalize.Sort")
+--  Facts (error "This should be set by Canonicalize.Sort")
+    Facts { dependencies = [] }
 
 
 
