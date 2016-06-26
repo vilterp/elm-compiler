@@ -79,32 +79,3 @@ defCons def@(Def _ (A.A _ pattern) _ _) sortedDefs =
 
     (_, YesMain defs main rest) ->
       YesMain (def : defs) main rest
-
-
---data CanonicalExpr
---  = Literal Literal.Literal
---  | Var Var.Canonical
---  | Range (Expr R.Region Def Var.Canonical Type.Canonical) (Expr R.Region Def Var.Canonical Type.Canonical)
---  | ExplicitList [Expr R.Region Def Var.Canonical Type.Canonical]
---  | Binop Var.Canonical (Expr R.Region Def Var.Canonical Type.Canonical) (Expr R.Region Def Var.Canonical Type.Canonical)
---  | Lambda (Pattern.Pattern R.Region Var.Canonical) (Expr R.Region Def Var.Canonical Type.Canonical)
---  | App (Expr R.Region Def Var.Canonical Type.Canonical) (Expr R.Region Def Var.Canonical Type.Canonical)
---  | If [(Expr R.Region Def Var.Canonical Type.Canonical, Expr R.Region Def Var.Canonical Type.Canonical)] (Expr R.Region Def Var.Canonical Type.Canonical)
---  | Let [Def] (Expr R.Region Def Var.Canonical Type.Canonical)
---  | Case (Expr R.Region Def Var.Canonical Type.Canonical) [(Pattern.Pattern R.Region Var.Canonical, Expr R.Region Def Var.Canonical Type.Canonical)]
---  | Data String [Expr R.Region Def Var.Canonical Type.Canonical]
---  | Access (Expr R.Region Def Var.Canonical Type.Canonical) String
---  | Update (Expr R.Region Def Var.Canonical Type.Canonical) [(String, Expr R.Region Def Var.Canonical Type.Canonical)]
---  | Record [(String, Expr R.Region Def Var.Canonical Type.Canonical)]
---  -- for type checking and code gen only
---  | Cmd ModuleName.Canonical
---  | Sub ModuleName.Canonical
---  | OutgoingPort String Type.Canonical
---  | IncomingPort String Type.Canonical
---  | Program (Main Type.Canonical) (Expr R.Region Def Var.Canonical Type.Canonical)
---  | SaveEnv ModuleName.Canonical Effects.Canonical
---  | GLShader String String Literal.GLShaderTipe
---
---
---toCanonicalExpr : Expr -> CanonicalExpr
---toCanonicalExpr

@@ -1,5 +1,6 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell #-}
 module AST.Module
     ( Header(..), Module(..)
 
@@ -18,6 +19,7 @@ module AST.Module
     where
 
 import Data.Binary
+import Data.Aeson.TH as JsonTH
 import Data.Aeson as Json
 import Data.Text as Text
 import Data.Vector as Vector
@@ -117,14 +119,6 @@ type Optimized =
   Module (Info [Optimized.Def])
 
 
-instance Json.ToJSON (Module (Info [Canonical.Def])) where
-  toJSON modul =
-    Json.object $
-      [ "name" .= ("moduleName" :: String)
-      , "defs" .= (program (info modul))
-      ]
-
-
 -- IMPORTS
 
 
@@ -178,6 +172,12 @@ type UnionInfo v =
 type CanonicalUnion =
   ( Var.Canonical, UnionInfo Var.Canonical )
 
+
+instance Json.ToJSON (Info [Canonical.Def]) where
+  toJSON info = toJSON (program info)
+
+
+$(JsonTH.deriveJSON JsonTH.defaultOptions ''Module)
 
 
 -- INTERFACES
