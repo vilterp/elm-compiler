@@ -8,7 +8,7 @@ module AST.Expression.Canonical
   )
   where
 
-import qualified Data.Aeson.TH as JsonTH
+import qualified Elm.Derive as ElmDerive
 
 import qualified AST.Expression.General as General
 import qualified AST.Pattern as Pattern
@@ -38,9 +38,9 @@ data Facts = Facts
     }
 
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Facts)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Facts)
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Def)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Def)
 
 
 dummyFacts :: Facts

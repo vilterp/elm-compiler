@@ -9,7 +9,7 @@ enrich the AST with more information.
 -}
 module AST.Expression.General where
 
-import qualified Data.Aeson.TH as JsonTH
+import qualified Elm.Derive as ElmDerive
 
 import qualified AST.Effects as Effects
 import qualified AST.Literal as Literal
@@ -74,8 +74,8 @@ data Main typ
 
 
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Main)
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Expr')
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Main)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Expr')
 
 
 ---- UTILITIES ----

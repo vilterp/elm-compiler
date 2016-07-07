@@ -5,8 +5,6 @@ module AST.Expression.Optimized
     , Decider(..), Choice(..)
     ) where
 
-import qualified Data.Text as Text
-
 import qualified AST.Expression.General as Expr
 import qualified AST.Literal as Literal
 import qualified AST.Module.Name as ModuleName

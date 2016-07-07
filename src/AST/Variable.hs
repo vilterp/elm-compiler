@@ -1,7 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 module AST.Variable where
 
-import qualified Data.Aeson.TH as JsonTH
+import qualified Elm.Derive as ElmDerive
 
 import Data.Binary
 import qualified Data.Maybe as Maybe
@@ -48,11 +48,11 @@ data Canonical = Canonical
     deriving (Eq, Ord)
 
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Canonical)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Canonical)
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Home)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Home)
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''TopLevel)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''TopLevel)
 
 
 local :: String -> Canonical
@@ -221,6 +221,9 @@ data Listing a = Listing
     deriving (Eq, Ord)
 
 
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Listing)
+
+
 openListing :: Listing a
 openListing =
     Listing [] True
@@ -243,6 +246,8 @@ data Value
     | Union !String !(Listing String)
     deriving (Eq, Ord)
 
+
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Value)
 
 
 -- CATEGORIZING VALUES

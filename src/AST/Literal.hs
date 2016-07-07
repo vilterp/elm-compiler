@@ -2,7 +2,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 module AST.Literal where
 
-import qualified Data.Aeson.TH as JsonTH
+import qualified Elm.Derive as ElmDerive
 
 import qualified Data.Map as Map
 
@@ -16,7 +16,7 @@ data Literal
     deriving (Eq, Ord)
 
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Literal)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Literal)
 
 
 toString :: Literal -> String
@@ -60,5 +60,5 @@ data GLShaderTipe = GLShaderTipe
     deriving (Eq)
 
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''GLShaderTipe)
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''GLTipe)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''GLShaderTipe)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''GLTipe)

@@ -1,7 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 module AST.Module.Name where
 
-import qualified Data.Aeson.TH as JsonTH
+import qualified Elm.Derive as ElmDerive
 
 import Data.Binary
 import qualified Data.List as List
@@ -19,7 +19,7 @@ data Canonical = Canonical
     deriving (Eq, Ord, Show)
 
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Canonical)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Canonical)
 
 
 inCore :: Raw -> Canonical

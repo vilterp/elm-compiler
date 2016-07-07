@@ -19,7 +19,7 @@ module AST.Module
     where
 
 import Data.Binary
-import Data.Aeson.TH as JsonTH
+import qualified Elm.Derive as ElmDerive
 import Data.Aeson as Json
 import Data.Text as Text
 import Data.Vector as Vector
@@ -177,7 +177,7 @@ instance Json.ToJSON (Info [Canonical.Def]) where
   toJSON info = toJSON (program info)
 
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Module)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Module)
 
 
 -- INTERFACES

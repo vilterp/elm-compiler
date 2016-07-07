@@ -1,7 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 module Reporting.Annotation where
 
-import qualified Data.Aeson.TH as JsonTH
+import qualified Elm.Derive as ElmDerive
 
 import Prelude hiding (map)
 import qualified Reporting.Region as R
@@ -14,7 +14,7 @@ import qualified Reporting.Region as R
 data Annotated annotation a
     = A annotation a
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Annotated)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Annotated)
 
 
 type Located a =

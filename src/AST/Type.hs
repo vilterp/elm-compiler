@@ -8,7 +8,7 @@ module AST.Type
     )
     where
 
-import qualified Data.Aeson.TH as JsonTH
+import qualified Elm.Derive as ElmDerive
 
 import Control.Arrow (second)
 import Data.Binary
@@ -52,9 +52,9 @@ data Aliased t
     deriving (Eq, Ord)
 
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Aliased)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Aliased)
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Canonical)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Canonical)
 
 
 -- CONSTRUCT USEFUL TYPES

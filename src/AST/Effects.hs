@@ -1,7 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 module AST.Effects where
 
-import qualified Data.Aeson.TH as JsonTH
+import qualified Elm.Derive as ElmDerive
 
 import qualified AST.Type as Type
 import qualified Elm.Package as Pkg
@@ -71,8 +71,8 @@ data Kind
   | Incoming Type.Canonical
 
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Effects)
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Info)
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''PortCanonical)
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Kind)
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''ManagerType)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Effects)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Info)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''PortCanonical)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Kind)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''ManagerType)

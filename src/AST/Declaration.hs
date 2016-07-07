@@ -1,7 +1,10 @@
 {-# OPTIONS_GHC -Wall #-}
+{-# LANGUAGE TemplateHaskell #-}
 module AST.Declaration where
 
 import Data.Binary
+
+import qualified Elm.Derive as ElmDerive
 
 import qualified AST.Expression.Source as Source
 import qualified AST.Expression.Valid as Valid
@@ -106,6 +109,11 @@ data Infix =
 
 data Assoc = L | N | R
     deriving (Eq)
+
+
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Infix)
+
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Assoc)
 
 
 assocToString :: Assoc -> String

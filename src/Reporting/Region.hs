@@ -2,7 +2,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 module Reporting.Region where
 
-import qualified Data.Aeson.TH as JsonTH
+import qualified Elm.Derive as ElmDerive
 import qualified Text.Parsec.Pos as Parsec
 
 
@@ -64,5 +64,5 @@ toString (Region start end) =
 --        ]
 
 
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Region)
-$(JsonTH.deriveJSON JsonTH.defaultOptions ''Position)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Region)
+$(ElmDerive.deriveBoth ElmDerive.defaultOptions ''Position)

@@ -1,4 +1,7 @@
+{-# LANGUAGE TemplateHaskell #-}
 module Elm.Package where
+
+import qualified Elm.Derive as ElmDerive
 
 import Data.Aeson
 import Data.Binary
@@ -18,7 +21,7 @@ data Name = Name
     deriving (Eq, Ord, Show)
 
 
-type Package = (Name, Version)
+$(ElmDerive.deriveElmDef ElmDerive.defaultOptions ''Name)
 
 
 dummyName :: Name
@@ -156,6 +159,9 @@ data Version = Version
     , _patch :: Int
     }
     deriving (Eq, Ord)
+
+
+$(ElmDerive.deriveElmDef ElmDerive.defaultOptions ''Version)
 
 
 initialVersion :: Version
